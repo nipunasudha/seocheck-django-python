@@ -15,8 +15,8 @@ def get_seocheck(request):
         form = SeocheckForm(request.POST)
         if form.is_valid():
             # return HttpResponseRedirect('/thanks/')
-            print(form.cleaned_data['seoUrl'])
-            return render(request, 'seocheck/home.html', {'nesting_status': "Yako wade hari"})
+            seoUrl = form.cleaned_data['seoUrl']
+            return render(request, 'seocheck/seocheck.html', {'seoUrl': seoUrl})
     else:
         form = SeocheckForm()
     return render(request, 'seocheck/home.html', {'form': form})

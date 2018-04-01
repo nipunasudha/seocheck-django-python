@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SEO Check Demo V.1</title>
-</head>
-<body>
-<h1>SEO Check Program Demo</h1>
-<h1>Performing operations
-    <span id="status">{{status}}</span>
-</h1>
-</body>
-</html>
+{% extends "./base.html" %}
+
+{% block title %}SEO Checkup{% endblock %}
+{% block body %}
+    <h1 class="mb-5">SEO Check Program Demo</h1>
+    <h3>Performing operations
+        <span id="status">{{ status }}</span>
+    </h3>
+{% endblock %}

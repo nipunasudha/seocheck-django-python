@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>SEO Check Program Demo</h1>
-<form action="/seocheck/" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit" />
-</form>
-</body>
-</html>
+{% extends "./base.html" %}
+
+{% block title %}SEO Checkup{% endblock %}
+{% block body %}
+    <h1 class="mb-5">SEO Check Program Demo</h1>
+    <form action="/seocheck/" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-primary" type="submit" value="Submit"/>
+    </form>
+{% endblock %}
