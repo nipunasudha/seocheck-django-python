@@ -36,13 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'clear_cache',
     'seocheck',
     'bootstrap4',
     'jquery',
     'bootstrap',
     'fontawesome',
-    # 'django_assets',
     "compressor",
+    "django_celery_results",
 ]
 
 MIDDLEWARE = [
@@ -136,3 +137,5 @@ STATICFILES_FINDERS = (
 )
 
 COMPRESS_ENABLED = False
+CELERY_RESULT_BACKEND = 'django-db'
+CSRF_USE_SESSIONS = True
