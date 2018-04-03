@@ -13,11 +13,11 @@ def launch_all_get_result_list(url):
     print("URL: " + url)
     result_list = {}
     result1 = task_1_get_css_status.delay(url)
-    result_list['result1'] = result1.task_id
+    result_list['task_1_get_css_status'] = result1.task_id
     result2 = task_2_get_keyword_density.delay(url)
-    result_list['result2'] = result2.task_id
+    result_list['task_2_get_keyword_density'] = result2.task_id
     result3 = task_3_get_sitemap_list.delay(url)
-    result_list['result3'] = result3.task_id
+    result_list['task_3_get_sitemap_list'] = result3.task_id
     print("XXXXXXXXXXXXXX launch_all_get_result_list() output")
     print(result_list)
     return result_list
@@ -25,7 +25,7 @@ def launch_all_get_result_list(url):
 
 def generate_status_list(task_list):
     print("XXXXXXXXXXXXXX First back2obj task id")
-    print(task_list['result1'])
+    print(task_list['task_1_get_css_status'])
     status_list = {}
     print("||||||||||||||||||||| STARTING TRACEBACK ||||||||")
     for task_name, task_id in task_list.items():

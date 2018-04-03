@@ -53,8 +53,10 @@ def ajax_seocheck_results(request):
     print(seocheck_task_list)
     seocheck_url = request.session.get('seocheck_url')
     status_list = generate_status_list(seocheck_task_list)
-    print("^^^^^^^^^^^^^^^^^^status list")
+    print("^^^^^^^^^^^^^^^^^^  status list")
     print(status_list)
+    print("^^^^^^^^^^^^^^^^^^")
+    
     # print(seocheck_results.result)
     # print(seocheck_results.ready())
     # print(seocheck_results.get(timeout=1))
