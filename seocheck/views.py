@@ -12,7 +12,7 @@ from celery.result import AsyncResult, GroupResult
 import json
 from django.http import JsonResponse
 from django.http import HttpResponse
-from .tasks import task_1_get_css_status, task_2_get_keyword_density, task_3_check_h2_tags
+from .tasks import task_1_get_css_status, task_2_get_keyword_density, task_3_get_sitemap_list
 
 
 def get_seocheck(request):
@@ -54,7 +54,6 @@ def ajax_seocheck_results(request):
     seocheck_url = request.session.get('seocheck_url')
     status_list = generate_status_list(seocheck_task_list)
     print("^^^^^^^^^^^^^^^^^^status list")
-    print(get_clean_text("http://www.ikman.lk"))
     print(status_list)
     # print(seocheck_results.result)
     # print(seocheck_results.ready())
