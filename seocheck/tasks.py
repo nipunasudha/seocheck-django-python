@@ -4,7 +4,8 @@ import time
 from celery import shared_task
 from pyquery import PyQuery as pq
 
-from toolset import get_table_status
+from toolset import get_table_status, get_keyword_density, check_h2_tags, get_robot_instance, \
+    get_css_status
 
 
 @shared_task
@@ -14,18 +15,17 @@ def launch_all(url):
 
 
 @shared_task
-def sub1():
-    time.sleep(2)
-    return "ONE"
+def task_1_get_css_status(url):
+    # return get_css_status(url)
+    return {'bad': 888}
 
 
 @shared_task
-def sub2():
-    time.sleep(4)
-    return "TWO"
+def task_2_get_keyword_density(url):
+    return get_keyword_density(url)
 
 
 @shared_task
-def sub3():
-    time.sleep(6)
-    return "THREE"
+def task_3_check_h2_tags(url):
+    robot = get_robot_instance(url)
+    return check_h2_tags(robot)
