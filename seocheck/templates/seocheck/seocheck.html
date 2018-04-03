@@ -25,15 +25,12 @@
         console.log("CSRF : " + csrftoken);
         $(function () {
             updateStatus();
-            setInterval(updateStatus,200000);
+            setInterval(updateStatus, 4000);
         });
 
         function updateStatus() {
             $.post("http://localhost:8000/seocheck/ajax/",
-                {
-                    name: "Donald Duck",
-                    city: "Duckburg"
-                },
+                {},
                 function (data, status) {
                     console.log(data);
                     $('#dataDisplay').html(JSON.stringify(data));

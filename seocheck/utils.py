@@ -34,7 +34,9 @@ def generate_status_list(task_list):
         result = AsyncResult(task_id)
         print("TRESULT: ")
         print(result.result)
+        print("____________ TRACE ________________")
         print(result.traceback)
+        print("____________ END TRACE ________________")
         status_list[task_name] = result.result
     print("||||||||||||||||||||| ENDING TRACEBACK ||||||||")
     return status_list

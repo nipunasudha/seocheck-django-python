@@ -63,5 +63,5 @@ def ajax_seocheck_results(request):
     # ==========================================
     response_data['status'] = 'success'
     response_data['url'] = seocheck_url
-    response_data['result'] = json.dumps(status_list)
+    response_data['result'] = status_list
     return JsonResponse(response_data)
