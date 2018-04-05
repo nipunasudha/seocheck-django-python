@@ -9,9 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
-    {% compress css %}
-        <link rel="stylesheet" href="{% static 'css/app-base.css' %}"/>
-    {% endcompress %}
+    {#    {% compress css %}#}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css"
+          integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/app-base.css' %}"/>
+    {#    {% endcompress %}#}
 
     <title>{% block title %}{% endblock %}</title>
 

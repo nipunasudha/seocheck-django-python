@@ -1,8 +1,9 @@
-var loadingBlock = "<div class='sk-folding-cube'>" +
+/*var loadingBlock = "<div class='sk-folding-cube'>" +
     "<div class='sk-cube1 sk-cube'></div>" +
     "<div class='sk-cube2 sk-cube'></div>" +
     "<div class='sk-cube4 sk-cube'></div>" +
-    "<div class='sk-cube3 sk-cube'></div>" + "</div>";
+    "<div class='sk-cube3 sk-cube'></div>" + "</div>";*/
+var loadingBlock = "<div class='spinner'></div>";
 var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 $.ajaxSetup({
     beforeSend: function (xhr, settings) {
@@ -77,4 +78,24 @@ function fill_task_3_get_sitemap_list(row, data) {
         }
         $(row + " .right-cell").html("<ol>" + renderedList + "</ol>")
     }
+}
+
+//_________________________________________________________
+
+function setStatusIcon(row, status) {
+    var statusIcon = ['fa-hourglass-half', 'fa-check', 'fa-times', 'fa-exclamation'];
+    var iconElem = $(row + " .stat-cell i");
+    if (status === 'waiting') {
+        iconElem.attr('class', 'fas ' + statusIcon[0])
+    }
+    if (status === 'ok') {
+        iconElem.attr('class', 'fas ' + statusIcon[1])
+    }
+    if (status === 'error') {
+        iconElem.attr('class', 'fas ' + statusIcon[2])
+    }
+    if (status === 'warning') {
+        iconElem.attr('class', 'fas ' + statusIcon[3])
+    }
+
 }

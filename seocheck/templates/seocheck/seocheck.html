@@ -4,25 +4,35 @@
 {% block stylesheet %}{% endblock %}
 {% block body %}
     {% csrf_token %}
-    <h1 class="mb-5">SEO Check Program Demo</h1>
-    <h3>Performing operations
+    <h1 class="mb-4">SEO Check Program Demo</h1>
+    <a href="{% url 'get_seocheck' %}" class="btn btn-warning btn-lg">New Check</a>
+    <h3 class="mt-3">Performing operations
         <span id="status">{{ status }}</span>
     </h3>
     <table class="table table-bordered" id="results">
         <colgroup>
             <col width="200">
+            <col width="35">
             <col>
         </colgroup>
         <tr id="task_css">
             <td class="left-cell"></td>
+            <td class="stat-cell"><i class="fas fa-check"></i></td>
             <td class="right-cell"></td>
         </tr>
         <tr id="keyword_density">
             <td class="left-cell"></td>
+            <td class="stat-cell"><i class="fas fa-times"></i></td>
             <td class="right-cell"></td>
         </tr>
         <tr id="sitemap">
             <td class="left-cell"></td>
+            <td class="stat-cell"><i class="fas fa-exclamation"></i></td>
+            <td class="right-cell"></td>
+        </tr>
+        <tr id="sitemap">
+            <td class="left-cell"></td>
+            <td class="stat-cell"><i class="fas fa-hourglass-half"></i></td>
             <td class="right-cell"></td>
         </tr>
     </table>

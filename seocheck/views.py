@@ -43,6 +43,10 @@ def get_seocheck_results(request):
     return render(request, 'seocheck/seocheck.html')
 
 
+def get_homepage(request):
+    return HttpResponseRedirect(route_url('get_seocheck', args=[]))
+
+
 def ajax_seocheck_results(request):
     global global_job_list
     # return {'a': 'b'}
@@ -56,7 +60,7 @@ def ajax_seocheck_results(request):
     print("^^^^^^^^^^^^^^^^^^  status list")
     print(status_list)
     print("^^^^^^^^^^^^^^^^^^")
-    
+
     # print(seocheck_results.result)
     # print(seocheck_results.ready())
     # print(seocheck_results.get(timeout=1))

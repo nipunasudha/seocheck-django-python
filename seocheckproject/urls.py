@@ -17,9 +17,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import HttpResponseRedirect
+
+from seocheck import views as seocheck_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', lambda r: HttpResponseRedirect('seocheck/')),
     url(r'^seocheck/', include('seocheck.urls')),
 ]
 

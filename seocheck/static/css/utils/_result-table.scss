@@ -1,0 +1,30 @@
+#dataDisplay {
+  padding-top: 40px;
+  font-size: 18px;
+  color: #999;
+}
+
+.left-cell {
+  font-size: 17px;
+  font-weight: bold;
+  color: #444;
+}
+
+#results {
+  .fas {
+    font-size: 24px;
+  }
+  .fa-check {
+    color: #2ecc71;
+  }
+  .fa-times {
+    color: #e74c3c;
+  }
+  .fa-exclamation {
+    margin-left: 5px;
+    color: #f39c12;
+  }
+  .fa-hourglass-half {
+    color: #777;
+  }
+}
