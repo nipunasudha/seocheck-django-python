@@ -66,7 +66,11 @@ def get_keyword_density(url):
     try:
         clean_text = get_clean_text(url)
         count, result = count_and_sort_words(clean_text)
-        message = msgKeywordDensity['yesKeywords'] if count else msgKeywordDensity['noKeywords']
+        if not count:
+            status = 'bad'
+            message = msgKeywordDensity['noKeywords']
+        else:
+            message = msgKeywordDensity['yesKeywords']
 
     except Exception:
         result = []

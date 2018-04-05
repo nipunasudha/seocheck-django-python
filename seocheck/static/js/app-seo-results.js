@@ -45,6 +45,15 @@ function fill_task_1_get_css_status(row, data) {
     else {
         $(row + " .right-cell").html(data['result']['task_1_get_css_status']['bad'])
     }
+
+
+    setRowTitle(row, "Inline CSS Test");
+    var result = data['result']['task_1_get_css_status'];
+    if (!result) {
+        setSpinner(row);
+    } else {
+        render_task_1_get_css_status(row, result)
+    }
 }
 
 function fill_task_2_get_keyword_density(row, data) {
@@ -68,6 +77,21 @@ function fill_task_3_get_sitemap_list(row, data) {
 }
 
 //====================== RENDERING ================================
+function render_task_1_get_css_status(row, result) {
+    clearRow(row);
+    status = getStatus(result);
+    data = getData(result);
+    msg = getMessage(result);
+    var renderedText = "";
+    if (status === 'bad') {
+        renderedText = msg[0] + textStrong(data) + msg[1]
+    } else {
+        renderedText = msg
+    }
+    appendToRow(row, renderedText + "<br>");
+    setStatusIcon(row, status);
+}
+
 function render_task_2_get_keyword_density(row, result) {
     clearRow(row);
     status = getStatus(result);
@@ -75,7 +99,7 @@ function render_task_2_get_keyword_density(row, result) {
     msg = getMessage(result);
     var renderedList = "";
     for (var i = 0; i < data.length; i++) {
-        renderedList += "<li><strong>" + data[i][0] + "</strong> - " + data[i][1] + "</li>"
+        renderedList += "<li>" + textStrong(data[i][0]) + " - " + data[i][1] + "</li>"
     }
     appendToRow(row, msg + "<br>");
     appendToRow(row, "<ol>" + renderedList + "</ol>");
@@ -109,7 +133,7 @@ function setRowTitle(row, title) {
 }
 
 function setStatusIcon(row, status) {
-    var statusIcon = ['fa-hourglass-half', 'fa-check', 'fa-times', 'fa-exclamation'];
+    var statusIcon = ['fa-hourglass-half', 'fa-check', 'fa-times', 'fa-exclamation', 'fa-question'];
     var iconElem = $(row + " .stat-cell i");
     if (status === 'waiting') {
         iconElem.attr('class', 'fas ' + statusIcon[0])
@@ -117,11 +141,14 @@ function setStatusIcon(row, status) {
     if (status === 'ok') {
         iconElem.attr('class', 'fas ' + statusIcon[1])
     }
-    if (status === 'error') {
+    if (status === 'bad') {
         iconElem.attr('class', 'fas ' + statusIcon[2])
     }
     if (status === 'warning') {
         iconElem.attr('class', 'fas ' + statusIcon[3])
+    }
+    if (status === 'error') {
+        iconElem.attr('class', 'fas ' + statusIcon[4])
     }
 
 }
@@ -150,3 +177,6 @@ function prependToRow(row, str) {
     $(row + " .right-cell").prepend(str);
 }
 
+function textStrong(text) {
+    return "<strong>" + text + "</strong>"
+}

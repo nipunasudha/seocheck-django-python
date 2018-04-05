@@ -28,5 +28,4 @@ def task_2_get_keyword_density(url):
 
 @shared_task
 def task_3_get_sitemap_list(url):
-    robot = get_robot_instance(url)
-    return get_sitemap_list(robot)
+    return get_sitemap_list(url)

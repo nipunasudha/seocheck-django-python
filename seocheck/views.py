@@ -1,5 +1,4 @@
-import time
-
+from url_normalize import url_normalize
 # from celery import group
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -20,7 +19,7 @@ def get_seocheck(request):
     if request.method == 'POST':
         form = SeocheckForm(request.POST)
         if form.is_valid():
-            seoUrl = form.cleaned_data['seoUrl']
+            seoUrl = url_normalize(form.cleaned_data['seoUrl'])
             # task_results = launch_all.delay(seoUrl)
             # job = group([sub1.s(), sub2.s(), sub3.s()])
             # task_results = job.apply_async()

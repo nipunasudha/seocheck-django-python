@@ -16,11 +16,16 @@ def get_robot_instance(url):
     return Robots.fetch(txt_location)
 
 
-def get_sitemap_list(robot_inst):
+def get_sitemap_list(url):
     status = "ok"
     try:
+        robot_inst = get_robot_instance(url)
         result = list(robot_inst.sitemaps)
-        message = msgSitemaps['yesSitemaps'] if len(result) else msgSitemaps['noSitemaps']
+        if not len(result):
+            status = 'bad'
+            message = msgSitemaps['noSitemaps']
+        else:
+            message = msgSitemaps['yesSitemaps']
 
     except Exception:
         result = []
