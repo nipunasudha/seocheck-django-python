@@ -4,10 +4,10 @@ import time
 from celery import shared_task
 from pyquery import PyQuery as pq
 
-from toolset.keyword_density import *
-from toolset.robot import *
-from toolset.keyword_density import *
-from toolset.css import *
+from seotoolset.keyword_density import *
+from seotoolset.robot import *
+from seotoolset.keyword_density import *
+from seotoolset.css import *
 
 
 @shared_task

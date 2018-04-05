@@ -1,6 +1,6 @@
 from celery.result import AsyncResult
 
-from toolset import get_webpage
+from seotoolset import get_webpage
 from .tasks import task_1_get_css_status, task_2_get_keyword_density, task_3_get_sitemap_list
 from pyquery import PyQuery as pq
 

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from seocheck.utils import shout, launch_all_get_result_list, generate_status_list
-from toolset import get_clean_text
+from seotoolset import get_clean_text
 from .forms import SeocheckForm
 from django.core.urlresolvers import reverse as route_url
 from celery.result import AsyncResult, GroupResult

@@ -92,3 +92,4 @@ venv/
 
 *.map
 node_modules/
+/static_cdn/
