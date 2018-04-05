@@ -4,7 +4,7 @@ from seotoolset import wrap_result
 
 MY_USER_AGENT = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:59.0) Gecko/20100101 Firefox/59.0'
 
-messageList = {
+msgSitemaps = {
     'yesSitemaps': 'Here are the sitemaps found',
     'noSitemaps': 'No site maps found',
     'errorSitemaps': 'Error occured while searching sitemaps'
@@ -20,11 +20,11 @@ def get_sitemap_list(robot_inst):
     status = "ok"
     try:
         result = list(robot_inst.sitemaps)
-        message = messageList['yesSitemaps'] if len(result) else messageList['noSitemaps']
+        message = msgSitemaps['yesSitemaps'] if len(result) else msgSitemaps['noSitemaps']
 
     except Exception:
         result = []
         status = "error"
-        message = messageList['errorSitemaps']
+        message = msgSitemaps['errorSitemaps']
 
     return wrap_result(result, status, message)

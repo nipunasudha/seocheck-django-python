@@ -1,5 +1,7 @@
 import operator
 import re
+
+from seotoolset import wrap_result
 from seotoolset.clean_text import *
 
 regex = re.compile('[^a-zA-Z]')
@@ -34,28 +36,41 @@ stop_words = ["a", "about", "above", "across", "after", "afterwards", "again", "
               "whom", "whose", "why", "will", "with", "within", "without", "would", "yet", "you", "your", "yours",
               "yourself", "yourselves"]
 
+KEYWORD_LIMIT = 5
+msgKeywordDensity = {
+    'yesKeywords': 'Here are the most common keywords found',
+    'noKeywords': 'No keywords were found',
+    'errorKeywords': 'Error occured while getting keywords'
+}
 
-def get_keyword_density(url):
+
+def count_and_sort_words(text):
+    text = regex.sub(' ', text)
     words = {}
-    clean_text = get_clean_text(url)
-    clean_text = regex.sub(' ', clean_text)
-    print("Started word counting")
-    print("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-    print(clean_text)
     count = 0
-    for word in clean_text.split():
-        count += 1
+    for word in text.split():
         word = word.lower()
         if word in stop_words: continue
         if len(word) < 2: continue
+        count += 1
         if word in words:
             words[word] = words.get(word) + 1
         else:
             words[word] = 1
-    # print(words)
-    # print(list(reversed(sorted(words.items(), key=operator.itemgetter(1)))))
-    if count == 0:
-        return {}
-    else:
-        # return list(reversed(sorted(words.items(), key=operator.itemgetter(1))))
-        return list([k, words[k]] for k in sorted(words, key=words.get, reverse=True))[:5]
+    sorted_words = list([k, words[k]] for k in sorted(words, key=words.get, reverse=True))[:KEYWORD_LIMIT]
+    return (count, sorted_words)
+
+
+def get_keyword_density(url):
+    status = "ok"
+    try:
+        clean_text = get_clean_text(url)
+        count, result = count_and_sort_words(clean_text)
+        message = msgKeywordDensity['yesKeywords'] if count else msgKeywordDensity['noKeywords']
+
+    except Exception:
+        result = []
+        status = "error"
+        message = msgKeywordDensity['errorKeywords']
+
+    return wrap_result(result, status, message)

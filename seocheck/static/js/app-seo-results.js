@@ -48,24 +48,17 @@ function fill_task_1_get_css_status(row, data) {
 }
 
 function fill_task_2_get_keyword_density(row, data) {
-    $(row + " .left-cell").html("Most Common Keywords Test");
-    if (!data['result']['task_2_get_keyword_density']) {
-        if ($(row).data('final') === "true") return;
-        $(row + " .right-cell").html(loadingBlock);
-        $(row).data('final', 'true')
+    setRowTitle(row, "Most Common Keywords Test");
+    var result = data['result']['task_2_get_keyword_density'];
+    if (!result) {
+        setSpinner(row);
     } else {
-        var renderedList = "";
-        wordList = data['result']['task_2_get_keyword_density'];
-        for (var i = 0; i < wordList.length; i++) {
-            renderedList += "<li>" + wordList[i][0] + " - " + wordList[i][1] + "</li>"
-        }
-        $(row + " .right-cell").html("<ol>" + renderedList + "</ol>");
+        render_task_2_get_keyword_density(row, result)
     }
-
 }
 
 function fill_task_3_get_sitemap_list(row, data) {
-    $(row + " .left-cell").html("Sitemap Test");
+    setRowTitle(row, "Sitemap Test");
     var result = data['result']['task_3_get_sitemap_list'];
     if (!result) {
         setSpinner(row);
@@ -75,6 +68,20 @@ function fill_task_3_get_sitemap_list(row, data) {
 }
 
 //====================== RENDERING ================================
+function render_task_2_get_keyword_density(row, result) {
+    clearRow(row);
+    status = getStatus(result);
+    data = getData(result);
+    msg = getMessage(result);
+    var renderedList = "";
+    for (var i = 0; i < data.length; i++) {
+        renderedList += "<li><strong>" + data[i][0] + "</strong> - " + data[i][1] + "</li>"
+    }
+    appendToRow(row, msg + "<br>");
+    appendToRow(row, "<ol>" + renderedList + "</ol>");
+    setStatusIcon(row, status);
+}
+
 function render_task_3_get_sitemap_list(row, result) {
     clearRow(row);
     status = getStatus(result);
@@ -97,6 +104,9 @@ function setSpinner(row) {
     $(row).data('is-spinner', 'true');
 }
 
+function setRowTitle(row, title) {
+    $(row + " .left-cell").html(title);
+}
 
 function setStatusIcon(row, status) {
     var statusIcon = ['fa-hourglass-half', 'fa-check', 'fa-times', 'fa-exclamation'];

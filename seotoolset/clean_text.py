@@ -7,11 +7,9 @@ ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
+
 def get_clean_text(url):
-    try:
-        html = request.urlopen(url, context=ctx).read()
-    except Exception:
-        return "Empty"
+    html = request.urlopen(url, context=ctx).read()
     soup = BeautifulSoup(html, 'lxml')
     # kill all script and style elements
     for script in soup(["script", "style"]):
