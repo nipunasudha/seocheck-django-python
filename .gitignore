@@ -91,3 +91,4 @@ venv/
 .idea/
 
 *.map
+node_modules/
