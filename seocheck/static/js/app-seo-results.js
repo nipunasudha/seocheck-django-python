@@ -16,7 +16,7 @@ $.ajaxSetup({
 console.log("CSRF : " + csrftoken);
 $(function () {
     updateStatus();
-    setInterval(updateStatus, 1500);
+    setInterval(updateStatus, 3000);
 });
 
 function updateStatus() {
@@ -66,21 +66,37 @@ function fill_task_2_get_keyword_density(row, data) {
 
 function fill_task_3_get_sitemap_list(row, data) {
     $(row + " .left-cell").html("Sitemap Test");
-    if (!data['result']['task_2_get_keyword_density']) {
-        if ($(row).data('final') === "true") return;
-        $(row + " .right-cell").html(loadingBlock);
-        $(row).data('final', 'true')
+    var result = data['result']['task_3_get_sitemap_list'];
+    if (!result) {
+        setSpinner(row);
     } else {
-        var renderedList = "";
-        sitemapList = data['result']['task_3_get_sitemap_list'];
-        for (var i = 0; i < sitemapList.length; i++) {
-            renderedList += "<li>" + sitemapList[i] + "</li>"
-        }
-        $(row + " .right-cell").html("<ol>" + renderedList + "</ol>")
+        render_task_3_get_sitemap_list(row, result)
     }
 }
 
+//====================== RENDERING ================================
+function render_task_3_get_sitemap_list(row, result) {
+    clearRow(row);
+    status = getStatus(result);
+    data = getData(result);
+    msg = getMessage(result);
+    var renderedList = "";
+    for (var i = 0; i < data.length; i++) {
+        renderedList += "<li><a href='" + data[i] + "'>" + data[i] + "</a></li>"
+    }
+    appendToRow(row, msg + "<br>");
+    appendToRow(row, "<ol>" + renderedList + "</ol>");
+    setStatusIcon(row, status)
+}
+
 //_________________________________________________________
+
+function setSpinner(row) {
+    if ($(row).data('is-spinner') === "true") return;
+    $(row + " .right-cell").html(loadingBlock);
+    $(row).data('is-spinner', 'true');
+}
+
 
 function setStatusIcon(row, status) {
     var statusIcon = ['fa-hourglass-half', 'fa-check', 'fa-times', 'fa-exclamation'];
@@ -99,3 +115,28 @@ function setStatusIcon(row, status) {
     }
 
 }
+
+function getStatus(result) {
+    return result['status']
+}
+
+function getData(result) {
+    return result['data']
+}
+
+function getMessage(result) {
+    return result['message']
+}
+
+function clearRow(row) {
+    $(row + " .right-cell").html('');
+}
+
+function appendToRow(row, str) {
+    $(row + " .right-cell").append(str);
+}
+
+function prependToRow(row, str) {
+    $(row + " .right-cell").prepend(str);
+}
+
