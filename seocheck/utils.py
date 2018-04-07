@@ -1,7 +1,7 @@
 from celery.result import AsyncResult
 
 from seotoolset import get_webpage
-from .tasks import task_1_get_css_status, task_2_get_keyword_density, task_3_get_sitemap_list
+from .tasks import *
 from pyquery import PyQuery as pq
 
 
@@ -18,6 +18,8 @@ def launch_all_get_result_list(url):
     result_list['task_2_get_keyword_density'] = result2.task_id
     result3 = task_3_get_sitemap_list.delay(url)
     result_list['task_3_get_sitemap_list'] = result3.task_id
+    result4 = task_4_get_favicon.delay(url)
+    result_list['task_4_get_favicon'] = result4.task_id
     print("XXXXXXXXXXXXXX launch_all_get_result_list() output")
     print(result_list)
     return result_list

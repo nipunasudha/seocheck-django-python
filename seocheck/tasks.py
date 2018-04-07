@@ -8,6 +8,7 @@ from seotoolset.keyword_density import *
 from seotoolset.robot import *
 from seotoolset.keyword_density import *
 from seotoolset.css import *
+from seotoolset.favicon import *
 
 
 @shared_task
@@ -29,3 +30,8 @@ def task_2_get_keyword_density(url):
 @shared_task
 def task_3_get_sitemap_list(url):
     return get_sitemap_list(url)
+
+
+@shared_task
+def task_4_get_favicon(url):
+    return get_favicon(url)

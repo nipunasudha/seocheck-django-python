@@ -33,20 +33,10 @@ function fill_all(data) {
     fill_task_1_get_css_status("#task_css", data);
     fill_task_2_get_keyword_density("#keyword_density", data)
     fill_task_3_get_sitemap_list("#sitemap", data)
+    fill_task_4_get_favicon("#favicon", data)
 }
 
 function fill_task_1_get_css_status(row, data) {
-    $(row + " .left-cell").html("Inline CSS Test");
-    if (!data['result']['task_1_get_css_status']) {
-        if ($(row).data('final') === "true") return;
-        $(row + " .right-cell").html(loadingBlock);
-        $(row).data('final', 'true')
-    }
-    else {
-        $(row + " .right-cell").html(data['result']['task_1_get_css_status']['bad'])
-    }
-
-
     setRowTitle(row, "Inline CSS Test");
     var result = data['result']['task_1_get_css_status'];
     if (!result) {
@@ -76,12 +66,22 @@ function fill_task_3_get_sitemap_list(row, data) {
     }
 }
 
+function fill_task_4_get_favicon(row, data) {
+    setRowTitle(row, "Favicon Test");
+    var result = data['result']['task_4_get_favicon'];
+    if (!result) {
+        setSpinner(row);
+    } else {
+        render_task_4_get_favicon(row, result)
+    }
+}
+
 //====================== RENDERING ================================
 function render_task_1_get_css_status(row, result) {
     clearRow(row);
-    status = getStatus(result);
-    data = getData(result);
-    msg = getMessage(result);
+    var status = getStatus(result);
+    var data = getData(result);
+    var msg = getMessage(result);
     var renderedText = "";
     if (status === 'bad') {
         renderedText = msg[0] + textStrong(data) + msg[1]
@@ -94,12 +94,12 @@ function render_task_1_get_css_status(row, result) {
 
 function render_task_2_get_keyword_density(row, result) {
     clearRow(row);
-    status = getStatus(result);
-    data = getData(result);
-    msg = getMessage(result);
+    var status = getStatus(result);
+    var data = getData(result);
+    var msg = getMessage(result);
     var renderedList = "";
     for (var i = 0; i < data.length; i++) {
-        renderedList += "<li>" + textStrong(data[i][0]) + " - " + data[i][1] + "</li>"
+        renderedList += textLi(textStrong(data[i][0]) + " - " + data[i][1])
     }
     appendToRow(row, msg + "<br>");
     appendToRow(row, "<ol>" + renderedList + "</ol>");
@@ -108,15 +108,28 @@ function render_task_2_get_keyword_density(row, result) {
 
 function render_task_3_get_sitemap_list(row, result) {
     clearRow(row);
-    status = getStatus(result);
-    data = getData(result);
-    msg = getMessage(result);
+    var status = getStatus(result);
+    var data = getData(result);
+    var msg = getMessage(result);
     var renderedList = "";
     for (var i = 0; i < data.length; i++) {
-        renderedList += "<li><a href='" + data[i] + "'>" + data[i] + "</a></li>"
+        renderedList += textLi(textUrl(data[i]))
     }
     appendToRow(row, msg + "<br>");
     appendToRow(row, "<ol>" + renderedList + "</ol>");
+    setStatusIcon(row, status)
+}
+
+function render_task_4_get_favicon(row, result) {
+    clearRow(row);
+    var status = getStatus(result);
+    var data = getData(result);
+    var msg = getMessage(result);
+    appendToRow(row, msg + "<br>");
+    if (status === 'ok') {
+        appendToRow(row, getImgFromSrc(data, "faviconPreview", 30));
+        appendToRow(row, textUrl(data));
+    }
     setStatusIcon(row, status)
 }
 
@@ -179,4 +192,16 @@ function prependToRow(row, str) {
 
 function textStrong(text) {
     return "<strong>" + text + "</strong>"
+}
+
+function textLi(text) {
+    return "<li>" + text + "</li>"
+}
+
+function textUrl(url) {
+    return "<a href='" + url + "'>" + url + "</a>"
+}
+
+function getImgFromSrc(src, id, height) {
+    return "<img src='" + src + "' id='" + id + "' height='" + height + "'/>"
 }
