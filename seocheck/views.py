@@ -36,7 +36,7 @@ def get_seocheck(request):
 
 
 def get_seocheck_results(request):
-    seocheck_task_id = request.session.get('seocheck_task_id')
+    seocheck_task_id = request.session.get('seocheck_task_list')
     if not seocheck_task_id:
         return HttpResponseRedirect(route_url('get_seocheck', args=[]))
     return render(request, 'seocheck/seocheck.html')
