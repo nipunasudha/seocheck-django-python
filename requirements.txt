@@ -14,7 +14,7 @@ colorama==0.3.9
 csscompressor==0.9.5
 cssselect==1.0.3
 cycler==0.10.0
-Django==1.11
+Django==2.2.24
 django-appconf==1.0.2
 django-assets==0.12
 django-bootstrap-static==4.0.0
