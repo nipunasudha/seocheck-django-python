@@ -33,7 +33,7 @@ kiwisolver==1.0.1
 kombu==4.1.0
 lxml==4.6.2
 matplotlib==2.2.2
-numpy==1.14.2
+numpy==1.22.0
 pathtools==0.1.2
 Pillow==5.0.0
 ply==3.11
